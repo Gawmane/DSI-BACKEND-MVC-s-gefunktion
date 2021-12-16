@@ -45,14 +45,14 @@ class SongModel {
     }
     create = (req, res) => {
         return new Promise((resolve, reject) => {
-            const arrFormValues = (Object.values(req.body));
+            const arrFormValues = Object.values(req.body)
             const sql = `INSERT INTO song(title, content, artist_id) 
         VALUES(?,?,?)`;
             db.query(sql, arrFormValues, (err, result) => {
                 if (err) {
-                    return err
+                    reject(err)
                 } else {
-                    resolve({ status: "OK", id: result.insertId });
+                    resolve({ status: true, id: result.insertId });
                 }
             })
         })
